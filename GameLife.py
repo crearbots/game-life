@@ -46,13 +46,18 @@ while True:
     for event in ev:
         # Detectamos si se presiona una tecla
         if event.type == pygame.KEYDOWN:
-            pauseExect = not pauseExect
+            if event.key == pygame.K_SPACE:
+                pauseExect = not pauseExect
         # Detectamos si se presiona el raton
         mouseClick = pygame.mouse.get_pressed()
         if sum(mouseClick) > 0:
             posX, posY = pygame.mouse.get_pos()
             celX, celY = int(np.floor(posX / dimCW)), int(np.floor(posY / dimCH))
             newGameState[celX, celY] = not mouseClick[2]
+        # Detectamos si se cierra el programa
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
     
     for y in range(0, nxC):
         for x in range(0, nyC):
