@@ -60,8 +60,12 @@ class GameWindow:
         self.screen.fill(self.bg)
         for y in range(self.nyC):
             for x in range(self.nxC):
-                color = (128, 128, 128) if self.game.cells[x][y] == 0 else (255, 255, 255)
-                pygame.draw.rect(self.screen, color, (x * self.cell_width, y * self.cell_height, self.cell_width, self.cell_height), 1)
+                if self.game.cells[x][y] == 0:
+                    color = (128, 128, 128)
+                    pygame.draw.rect(self.screen, color, (x * self.cell_width, y * self.cell_height, self.cell_width, self.cell_height), 1)
+                else:
+                    color = (255, 255, 255)
+                    pygame.draw.rect(self.screen, color, (x * self.cell_width, y * self.cell_height, self.cell_width, self.cell_height), 0)
         pygame.display.flip()
 
     def handle_events(self):
@@ -88,6 +92,6 @@ pattern_glider = [
 
 # Crear y ejecutar la ventana del juego
 game_window = GameWindow(700, 700, 50, 50)
-game_window.game.set_pattern(pattern_glider, x_offset=10, y_offset=10)  # Establece el patrón "Planeador"
+game_window.game.set_pattern(pattern_glider, x_offset=10, y_offset=10)  # Establecemos el patrón "Planeador"
 game_window.run()
 
